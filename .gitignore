@@ -17,6 +17,16 @@ __pycache__/
 # Logs
 *.log
 
+# Local credentials and private keys
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.json
+
 # VS Code folders
 .vscode/
 
