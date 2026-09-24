@@ -14,6 +14,6 @@ int main(){
     }else{
         printf("%d is greater than %d \n",b,a);
     }
-
+    printf("thank you for using this program \n");
     return 0;
 }
