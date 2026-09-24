@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import subprocess
 import threading
 import time
@@ -9,15 +10,33 @@ from watchdog.observers import Observer
 
 REPO_DIR = Path(__file__).resolve().parent
 IGNORED_DIRS = {".git", ".venv", "venv", "node_modules", "__pycache__"}
+LOCK_HINTS = (
+    "unable to create",
+    "index.lock",
+    "cannot lock ref",
+    "another git process seems to be running",
+)
 
 
-def run_git(args, check=False, capture_output=True):
-    return subprocess.run(
-        ["git", "-C", str(REPO_DIR), *args],
-        check=check,
-        capture_output=capture_output,
-        text=True,
-    )
+def run_git(args, check=False, capture_output=True, retries=3):
+    last = None
+    for attempt in range(retries + 1):
+        last = subprocess.run(
+            ["git", "-C", str(REPO_DIR), *args],
+            check=check,
+            capture_output=capture_output,
+            text=True,
+        )
+        if last.returncode == 0:
+            return last
+
+        err = (last.stderr or "") + (last.stdout or "")
+        if any(hint in err.lower() for hint in LOCK_HINTS):
+            if attempt < retries:
+                time.sleep(1.5 * (attempt + 1))
+                continue
+        break
+    return last
 
 
 def ensure_git_identity():
@@ -83,7 +102,29 @@ def should_ignore(path: str) -> bool:
     return False
 
 
+def ensure_single_instance():
+    pid_file = REPO_DIR / ".git" / "autopush.pid"
+    pid = None
+    if pid_file.exists():
+        try:
+            pid = int(pid_file.read_text().strip())
+        except ValueError:
+            pid = None
+
+        if pid is not None:
+            try:
+                os.kill(pid, 0)
+                print(f"Another auto-push watcher is already running with PID {pid}.")
+                raise SystemExit(0)
+            except OSError:
+                pid_file.unlink(missing_ok=True)
+
+    pid_file.parent.mkdir(parents=True, exist_ok=True)
+    pid_file.write_text(str(os.getpid()))
+
+
 if __name__ == "__main__":
+    ensure_single_instance()
     ensure_git_identity()
     handler = RepoChangeHandler()
 
@@ -99,3 +140,7 @@ if __name__ == "__main__":
         observer.stop()
     finally:
         observer.join()
+        try:
+            (REPO_DIR / ".git" / "autopush.pid").unlink(missing_ok=True)
+        except Exception:
+            pass
