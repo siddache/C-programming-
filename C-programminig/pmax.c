@@ -6,5 +6,6 @@
 
 int main()
 {
-    //awdadwadwadawdadwd
+    printf("Hello, World!");
+    return 0;
 }
