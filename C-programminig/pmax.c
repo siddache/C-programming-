@@ -6,6 +6,6 @@
 
 int main()
 {
-    printf("Hello, pmaxxx  vghvcgc  gtf yufyut  gftyf  gf ftu  fyuf  hufuewuvf erurthgui hu worldd  u");
+    printf("Hello, pmaxxx   u");
     return 0;
 }
