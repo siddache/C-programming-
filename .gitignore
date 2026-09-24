@@ -1,0 +1,29 @@
+# C compiled artifacts
+*.o
+*.obj
+*.out
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+*.bin
+
+# Python cache
+__pycache__/
+*.pyc
+.venv/
+
+# Logs
+*.log
+
+# VS Code folders
+.vscode/
+
+# build folders
+build/
+dist/
+
+# editor temp files
+*.swp
+*~

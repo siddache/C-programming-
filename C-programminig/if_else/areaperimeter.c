@@ -9,7 +9,7 @@ int main (){
     printf("enter the breath : ");
     scanf("%d",&b);
     int A=l*b;
-    int P=2*(l+b);
+    int P=2*(l+b); 
 
     if(A>P){
 
