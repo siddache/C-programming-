@@ -35,6 +35,13 @@ class RepoChangeHandler(FileSystemEventHandler):
         self.lock = threading.Lock()
         self.timer = None
 
+    def on_any_event(self, event):
+        if event.is_directory:
+            return
+        if should_ignore(event.src_path):
+            return
+        self.schedule_commit()
+
     def schedule_commit(self, event=None):
         with self.lock:
             if self.timer is not None:
