@@ -6,6 +6,6 @@
 
 int main()
 {
-    printf("Hello, pmaxxx   u");
+    // printf("Hello, pmaxxx   u");
     return 0;
 }
