@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import os
 import subprocess
 import threading
 import time
@@ -18,35 +17,21 @@ LOCK_HINTS = (
 )
 
 
-def run_git(args, check=False, capture_output=True, retries=3):
-    last = None
+def run_git(args, retries=3):
     for attempt in range(retries + 1):
-        last = subprocess.run(
+        result = subprocess.run(
             ["git", "-C", str(REPO_DIR), *args],
-            check=check,
-            capture_output=capture_output,
+            capture_output=True,
             text=True,
         )
-        if last.returncode == 0:
-            return last
+        if result.returncode == 0:
+            return result
 
-        err = (last.stderr or "") + (last.stdout or "")
-        if any(hint in err.lower() for hint in LOCK_HINTS):
-            if attempt < retries:
-                time.sleep(1.5 * (attempt + 1))
-                continue
-        break
-    return last
-
-
-def ensure_git_identity():
-    name = run_git(["config", "--get", "user.name"], check=False)
-    if not name.stdout.strip():
-        run_git(["config", "user.name", "AutoPush Bot"], check=False)
-
-    email = run_git(["config", "--get", "user.email"], check=False)
-    if not email.stdout.strip():
-        run_git(["config", "user.email", "autopush@example.com"], check=False)
+        err = (result.stderr or "") + (result.stdout or "")
+        if any(hint in err.lower() for hint in LOCK_HINTS) and attempt < retries:
+            time.sleep(1.5 * (attempt + 1))
+            continue
+        return result
 
 
 class RepoChangeHandler(FileSystemEventHandler):
@@ -61,7 +46,7 @@ class RepoChangeHandler(FileSystemEventHandler):
             return
         self.schedule_commit()
 
-    def schedule_commit(self, event=None):
+    def schedule_commit(self):
         with self.lock:
             if self.timer is not None:
                 self.timer.cancel()
@@ -71,23 +56,25 @@ class RepoChangeHandler(FileSystemEventHandler):
 
     def commit_and_push(self):
         try:
-            status = run_git(["status", "--porcelain"], check=False)
+            status = run_git(["status", "--porcelain"])
             if not status.stdout.strip():
                 return
 
-            run_git(["add", "-A"], check=True)
-            message = f"auto-commit {time.strftime('%Y-%m-%d %H:%M:%S')}"
-            commit = run_git(["commit", "-m", message], check=False)
+            add = run_git(["add", "-A"])
+            if add.returncode != 0:
+                print(add.stderr.strip() or add.stdout.strip())
+                return
+
+            commit = run_git(["commit", "-m", f"auto-commit {time.strftime('%Y-%m-%d %H:%M:%S')}"])
             if commit.returncode != 0:
                 if "nothing to commit" in (commit.stderr or "").lower():
                     return
                 print(commit.stderr.strip() or commit.stdout.strip())
                 return
 
-            push = run_git(["push", "origin", "HEAD"], check=False)
+            push = run_git(["push", "origin", "HEAD"])
             if push.returncode != 0:
-                error = push.stderr.strip() or push.stdout.strip()
-                print(error or "Push failed.")
+                print(push.stderr.strip() or push.stdout.strip() or "Push failed.")
             else:
                 print("Pushed successfully.")
         except Exception as exc:
@@ -102,32 +89,8 @@ def should_ignore(path: str) -> bool:
     return False
 
 
-def ensure_single_instance():
-    pid_file = REPO_DIR / ".git" / "autopush.pid"
-    pid = None
-    if pid_file.exists():
-        try:
-            pid = int(pid_file.read_text().strip())
-        except ValueError:
-            pid = None
-
-        if pid is not None:
-            try:
-                os.kill(pid, 0)
-                print(f"Another auto-push watcher is already running with PID {pid}.")
-                raise SystemExit(0)
-            except OSError:
-                pid_file.unlink(missing_ok=True)
-
-    pid_file.parent.mkdir(parents=True, exist_ok=True)
-    pid_file.write_text(str(os.getpid()))
-
-
 if __name__ == "__main__":
-    ensure_single_instance()
-    ensure_git_identity()
     handler = RepoChangeHandler()
-
     observer = Observer()
     observer.schedule(handler, str(REPO_DIR), recursive=True)
     observer.start()
@@ -140,7 +103,3 @@ if __name__ == "__main__":
         observer.stop()
     finally:
         observer.join()
-        try:
-            (REPO_DIR / ".git" / "autopush.pid").unlink(missing_ok=True)
-        except Exception:
-            pass
