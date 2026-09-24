@@ -1,5 +1,5 @@
 //awdawdwdwdaw judhhu jif u higsacu g ahsgf  hhvf sug jiasbsficug asuigf  i ihgasfuig jgga sfcgo hhgsaf v viasfhg
 #include <stdio.h>
 int main (){
-    printf("hello pmax ");
+    printf("thanks pmax for this bat file  ");
 }
