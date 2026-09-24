@@ -8,8 +8,6 @@ int main (){
     printf("enter the value of y  : ");
     scanf("%d ",&y);
 
-
-
       if(y==0 && x==0){
         printf(" lies on origin  ");
       }
@@ -23,14 +21,6 @@ int main (){
         else{
             printf("neither on the axes nor at the origin");
         }
-
-    
-
-
-
-
-
-
     return 0;
 }
  
