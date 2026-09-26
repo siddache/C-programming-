@@ -14,10 +14,12 @@ int main (){
     printf("ENTER THE YEAR : ");
     int n;
     scanf("%d",&n);
-    if(n%4==0){
+    if((n%4==0 && n%400==100)||n%100==0)
+    {
         printf("%d IS A LEAP YEAR\n",n);
     }
-    else {
+    else  
+    {
         printf("%d IS NOT A LEAP YEAR\n",n);
     }
 
