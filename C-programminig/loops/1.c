@@ -8,7 +8,7 @@ int main(){
     scanf("%d",&n);
 
     for(int i=1;i<=n;i++){
-        printf(" %d time num is printed in terminal ",&n);
+        printf("  time num is printed in terminal ");
     }
 
 
