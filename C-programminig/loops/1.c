@@ -2,13 +2,11 @@
 #include <stdio.h>
 
 int main(){
-    
-    int main ()
-    {
-        for(i=1;i<=6;i++)
+     
+        for(int i=1;i<=6;i++)
         {
-            printf("hello loop ");
+            printf("hello loop \n");
         }
-    }
+    
     return 0;
 }
