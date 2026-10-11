@@ -1,8 +1,11 @@
 #include <stdio.h>
 
 int main (){
+    int n;
+    printf("enter the num ");
+    scanf("%d",&n);
   
-    for(int i=1;i<=100;i++)
+    for(int i=1;i<=n;i++)
     {
         printf("%d ",i);
     }
