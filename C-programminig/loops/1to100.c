@@ -13,6 +13,10 @@ int main(){
     for(i=1;i<=5;i++){
         printf("hello ");
     }
+    // //int i = 10; // initialize i
+    // printf("Value of i: %d\n", i);   // prints the value
+    // printf("Address of i: %p\n", &i); // prints the memory address
+    
     printf("%d",i);
 
 
