@@ -10,7 +10,7 @@ int main()
     int a;
     for(int i=1;a>0;i++){
 
-        printf("%d",a);
+        printf("%d ",a);
         a=n%2;
 
     }
