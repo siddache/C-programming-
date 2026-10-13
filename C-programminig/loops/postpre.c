@@ -10,7 +10,7 @@ int main (){
     //  printf("%d",x);
 
 
-     int x = 4,y,z;
+     int x = 10,y,z;
      y=x--;
      z=--x;
      printf("\n %d , %d , %d ",x,y,z); 
