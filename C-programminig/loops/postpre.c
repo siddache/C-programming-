@@ -2,7 +2,7 @@
 int main (){
      int x = 5;
      x=--x;
-     x=x--;
+    // !  x=x--;
 
      printf("%d",x);
 }
