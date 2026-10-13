@@ -4,7 +4,7 @@ int main (){
     //  x=--x;
     //    x=x--;
 
-    printf("%d\n",x--);
+    printf("%d\n",x);
     printf("%d\n",x++);
 
      printf("%d",x);
