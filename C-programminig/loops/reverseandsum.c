@@ -19,7 +19,7 @@ int main()
 
     }
     
-    printf("the reverse numbers are  :%d ", sum);
+    printf("the reverse numbers are  :%d ", r);
 
     return 0;
 }
