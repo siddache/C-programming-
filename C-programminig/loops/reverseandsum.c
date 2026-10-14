@@ -16,9 +16,7 @@ int main()
         r = r + (n % 10);
 
         n = n / 10;
-
     }
-    
     printf("the reverse numbers are  :%d ", r);
 
     return 0;
