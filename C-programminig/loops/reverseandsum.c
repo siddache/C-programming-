@@ -1,5 +1,5 @@
 //!
-#include <stdio.h>
+
 
 #include <stdio.h>
 
@@ -16,8 +16,9 @@ int main()
         r = r + (n % 10);
 
         n = n / 10;
+
     }
-    sum = r + n;
+    
     printf("the reverse numbers are  :%d ", sum);
 
     return 0;
