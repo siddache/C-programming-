@@ -17,7 +17,7 @@ int main()
 
         n = n / 10;
     }
-    sum = n + r;
+    
     printf("the reverse numbers are  :%d ", r=n+r);
 
     return 0;
