@@ -1,11 +1,10 @@
 //!
 
-
 #include <stdio.h>
 
 int main()
 {
-    int n ,sum;
+    int n, sum;
     printf("enter the num : ");
     scanf("%d", &n);
 
@@ -16,10 +15,9 @@ int main()
         r = r + (n % 10);
 
         n = n / 10;
-        
     }
-    sum=n+r;
-    printf("the reverse numbers are  :%d ",sum );
+    sum = n + r;
+    printf("the reverse numbers are  :%d ", sum);
 
     return 0;
 }
