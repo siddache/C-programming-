@@ -1,4 +1,4 @@
-//!wap tp print sum of all the even digits of a given  number 
+//! wap tp print sum of all the even digits of a given  number
 
 #include <stdio.h>
 
@@ -9,18 +9,17 @@ int main()
     printf("enter the the digit : ");
     scanf("%d", &n);
 
-int sum = 0;
-while (n != 0)
-{
-    if(n%2==0)  {
-    int lastDigit = n % 10; // Extract the last digit
-    sum = sum + lastDigit;  // Add it to the sum
-    n = n / 10;
+    int sum = 0;
+    while (n != 0 && n % 2 == 0)
+    {
+
+        int lastDigit = n % 10; // Extract the last digit
+        sum = sum + lastDigit;  // Add it to the sum
+        n = n / 10;
+
+        // Remove the last digit
+    }
     printf("here is sum of the digits : %d", sum);
-    } 
-            // Remove the last digit
-}
 
-
-return 0;
+    return 0;
 }
