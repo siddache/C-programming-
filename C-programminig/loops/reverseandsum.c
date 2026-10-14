@@ -1,4 +1,4 @@
-//!
+//! The goal is to take a number (e.g., 1234), find its reverse (4321), and add them together (1234 + 4321 = 5555).
 
 #include <stdio.h>
 
@@ -17,10 +17,12 @@ int main()
         
 
         n = n / 10;
-        sum = originalNum+r;
+        
     }
+     sum = originalNum+r;
     
-    printf("the reverse numbers are  :%d ",sum );
+    printf("The sum of the number and its reverse is: %d\n", sum);
 
     return 0;
 }
+
