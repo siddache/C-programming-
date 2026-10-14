@@ -4,7 +4,7 @@
 
 int main()
 {
-    int n, sum;
+    int n, sum,lastDigit;
     printf("enter the num : ");
     scanf("%d", &n);
 
@@ -13,6 +13,7 @@ int main()
     {
         r = r * 10;
         r = r + (n % 10);
+        sum = sum + lastDigit; 
 
         n = n / 10;
     }
