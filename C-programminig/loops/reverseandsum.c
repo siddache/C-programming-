@@ -17,9 +17,10 @@ int main()
         
 
         n = n / 10;
+        sum = originalNum+r;
     }
     
-    printf("the reverse numbers are  :%d ", r=n+r);
+    printf("the reverse numbers are  :%d ",sum );
 
     return 0;
 }
