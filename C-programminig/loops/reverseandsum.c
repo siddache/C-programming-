@@ -8,6 +8,7 @@ int main()
     printf("enter the num : ");
     scanf("%d", &n);
 
+    int originalNum = n;
     int r = 0;
     while (n > 0)
     {
