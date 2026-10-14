@@ -12,10 +12,11 @@ int main()
 int sum = 0;
 while (n != 0)
 {
+    if(n%2==0)  ;
     int lastDigit = n % 10; // Extract the last digit
     sum = sum + lastDigit;  // Add it to the sum
     n = n / 10; 
-    if(n%2==0)  ;          // Remove the last digit
+            // Remove the last digit
 }
 printf("here is sum of the digits : %d", sum);
 
