@@ -13,12 +13,12 @@ int main()
     {
         r = r * 10;
         r = r + (n % 10);
-        sum = sum + lastDigit; 
+        
 
         n = n / 10;
     }
     sum = n + r;
-    printf("the reverse numbers are  :%d ", sum);
+    printf("the reverse numbers are  :%d ", r=n+r);
 
     return 0;
 }
