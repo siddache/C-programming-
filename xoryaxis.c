@@ -1,4 +1,4 @@
-// 
+// ! commannd = ./start_auto_push.ps1   
 #include <stdio.h>
 int main (){
     int x,y;
