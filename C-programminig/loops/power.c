@@ -14,7 +14,7 @@ int main (){
         power = power *a ;
 
     }
-    printf("%d raise to power %d is :: %d",a,b,power );
+    printf("%d raise to power %d is :: %d \n ",a,b,power );
 
 
     return 0;
