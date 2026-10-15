@@ -13,6 +13,6 @@ int main()
         fact= fact*i;
          printf("%d \n ",fact);
     }
-    printf("%d \n ",fact);
+    printf("foactorial : %d \n ",fact);
     return 0;
 }
