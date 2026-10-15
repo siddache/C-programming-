@@ -11,6 +11,7 @@ int main()
     for(int i =1;i<=n;i++)
     {
         fact= fact*i;
+         printf("%d \n ",fact);
     }
     printf("%d \n ",fact);
     return 0;
