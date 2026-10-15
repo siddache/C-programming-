@@ -13,6 +13,6 @@ int main(){
         a = b;
         b = sum;
     }
-    printf("the fibonacci of %d is  : %d\n",n,sum);
+    printf("the fibonacci of %dth is  : %d\n",n,sum);
     return 0;
 }
