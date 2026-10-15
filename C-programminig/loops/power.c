@@ -13,8 +13,9 @@ int main (){
     for(int i =1;i<=b;i++){
         power = power *a ;
 
+         printf("%d raise to power %d is :: %d \n ",a,b,power );// home this was 
     }
-    printf("%d raise to power %d is :: %d \n ",a,b,power );
+    // printf("%d raise to power %d is :: %d \n ",a,b,power );
 
 
     return 0;
