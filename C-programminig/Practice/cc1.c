@@ -8,10 +8,10 @@ int main() {
     printf("enetr the num : ")
     scanf("%d",&n);
     
-    int r=1;
+    
     int i=1;
     while(i<=n){
-        r=n%10;
+        i=n%10;
     }
     i++;
     printf("%d",r);
