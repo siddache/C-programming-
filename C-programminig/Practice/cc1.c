@@ -14,7 +14,7 @@ int main() {
         i=n%10;
     }
     i++;
-    printf("%d",r);
+    printf("%d",i);
     
 	return 0;
 
